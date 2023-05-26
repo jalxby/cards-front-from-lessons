@@ -7,7 +7,7 @@ import { createTheme, ThemeProvider } from "@mui/material"
 import { useAppDispatch, useAppSelector } from "@/app/hooks"
 import { useEffect } from "react"
 import { appActions } from "@/features/app/app.slice"
-import { instance } from "@/app/instance"
+import { authThunks } from "@/features/auth/auth.slice"
 
 export const Test = () => {
   const isLoading = useAppSelector((state) => state.app.isLoading)
@@ -22,12 +22,24 @@ export const Test = () => {
     setTimeout(() => {
       dispatch(appActions.setIsLoading({ isLoading: false }))
     }, 3000)
-    instance.get("/ping")
   }, [dispatch])
 
   if (isLoading) return <div>loading...</div>
   return (
     <div>
+      <button
+        onClick={() => {
+          dispatch(
+            authThunks.login({
+              email: "andres99.dev@gmail.com",
+              password: "123123123",
+              rememberMe: true,
+            }),
+          )
+        }}
+      >
+        login
+      </button>
       <button onClick={handleErrorButtonClicked}>create error</button>
       {!!error && <h2>{error}</h2>}
       <Counter />
