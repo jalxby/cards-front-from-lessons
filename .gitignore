@@ -34,3 +34,9 @@ build
 
 .env.development
 .env.production
+
+
+# editors
+
+.idea
+.vscode
