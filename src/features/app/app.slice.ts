@@ -1,12 +1,16 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit"
 
+const initialAppState = {
+  error: null as null | string,
+  isLoading: true,
+  isAppInitialized: false,
+}
+
+export type InitialAppState = typeof initialAppState
+
 const slice = createSlice({
   name: "app",
-  initialState: {
-    error: null as null | string,
-    isLoading: true,
-    isAppInitialized: false,
-  },
+  initialState: initialAppState,
   reducers: {
     setIsLoading: (state, action: PayloadAction<{ isLoading: boolean }>) => {
       state.isLoading = action.payload.isLoading
@@ -14,11 +18,11 @@ const slice = createSlice({
     setError: (state, action: PayloadAction<{ error: string | null }>) => {
       state.error = action.payload.error
     },
-    setIsAppInitialized: (
+    setAppInitialized: (
       state,
-      action: PayloadAction<{ isInitialized: boolean }>,
+      action: PayloadAction<{ isAppInitialized: boolean }>,
     ) => {
-      state.isAppInitialized = action.payload.isInitialized
+      state.isAppInitialized = action.payload.isAppInitialized
     },
   },
 })

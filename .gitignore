@@ -28,3 +28,9 @@ build
 
 # Miscellaneous
 *.local
+
+
+# env
+
+.env.development
+.env.production
