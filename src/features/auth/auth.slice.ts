@@ -6,23 +6,11 @@ import {
   RegisterResponse,
   User,
 } from "@/features/auth/auth.api"
-import { createAppAsyncThunk, thunkTryCatch } from "@/common"
-import { BaseThunkAPI } from "@reduxjs/toolkit/dist/createAsyncThunk"
-import { AppDispatch, RootState } from "@/app/store"
+import { createAppAsyncThunk, createThunkAction } from "@/common"
 
 const THUNK_PREFIXES = {
   REGISTER: "auth/register",
-}
-const createThunkAction = <A, R, T>(
-  promise: (arg: A) => Promise<R>,
-  transformPromise: (arg: R) => T,
-) => {
-  return (
-    arg: A,
-    thunkAPI: BaseThunkAPI<RootState, any, AppDispatch, unknown>,
-  ) => {
-    return thunkTryCatch(thunkAPI, () => promise(arg).then(transformPromise))
-  }
+  LOGIN: "auth/login",
 }
 
 const register = createAppAsyncThunk<{ user: RegisterResponse }, RegisterArgs>(
@@ -31,7 +19,7 @@ const register = createAppAsyncThunk<{ user: RegisterResponse }, RegisterArgs>(
 )
 
 const login = createAppAsyncThunk<{ user: User }, LoginArgs>(
-  "auth/login",
+  THUNK_PREFIXES.LOGIN,
   createThunkAction(AuthApi.login, (res) => ({ user: res.data })),
 )
 
