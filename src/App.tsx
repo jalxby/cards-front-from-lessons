@@ -7,7 +7,7 @@ import {
 } from "react-router-dom"
 import "./App.css"
 import "react-toastify/dist/ReactToastify.css"
-import { createTheme, LinearProgress, ThemeProvider } from "@mui/material"
+import { createTheme, LinearProgress, Slider, ThemeProvider } from "@mui/material";
 import { useAppDispatch, useAppSelector } from "@/app/hooks"
 import { useEffect } from "react"
 import { appActions } from "@/features/app/app.slice"
@@ -59,6 +59,19 @@ export const Test = () => {
       <button onClick={handleErrorButtonClicked}>create error</button>
       {!!error && <h2>{error}</h2>}
       <Counter />
+      <Slider
+        sx={{
+          width: "155px",
+          height: "5px",
+          color: "#366EFF",
+          borderRadius: "10px",
+          track: { opacity: "0.5", background: "#366EFF" },
+        }}
+        size="small"
+        max={130}
+        value={[0, 120]}
+        valueLabelDisplay="on"
+      />
     </div>
   )
 }
